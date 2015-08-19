@@ -15,3 +15,17 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
+Route::get('/resume', function()
+{
+	return 'This is my résumé';
+});
+
+Route::get('/portfolio', function()
+{
+	return 'This is my portfolio';
+});
+Route::get('/rolldice/{guess}', function($guess)
+{
+    $data = array('guess' => $guess);
+	return View::make('roll-dice')->with($data);
+});
