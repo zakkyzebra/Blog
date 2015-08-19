@@ -11,21 +11,38 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
-Route::get('/resume', function()
-{
-	return 'This is my résumé';
-});
-
 Route::get('/portfolio', function()
 {
-	return 'This is my portfolio';
+	return View::make('portfolio');
 });
+
+Route::get('/resume', function()
+{
+	return View::make('resume');
+});
+
 Route::get('/rolldice/{guess}', function($guess)
 {
     $data = array('guess' => $guess);
 	return View::make('roll-dice')->with($data);
+});
+
+Route::get('/', function()
+{
+	return View::make('index');
+});
+
+Route::get('/about', function()
+{
+	return View::make('about');
+});
+
+Route::get('/contact', function()
+{
+	return View::make('contact');
+});
+
+Route::get('/post', function()
+{
+	return View::make('post');
 });
