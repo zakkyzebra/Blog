@@ -28,5 +28,11 @@ Route::get('/rolldice/{guess}', function($guess)
 	return View::make('roll-dice')->with($data);
 });
 
+Route::get('orm-test', function ()
+{
+	$posts = Post::all();
+	return $posts;
+});
+
 
 

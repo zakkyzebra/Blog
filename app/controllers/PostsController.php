@@ -9,8 +9,8 @@ class PostsController extends \BaseController {
 	 */
 	public function index()
 	{
-		//show posts
-		return "We RINDEX";
+		$posts = Post::all();
+		return View::make('posts.index')->with(['posts'=> $posts]);
 	}
 
 
@@ -22,7 +22,7 @@ class PostsController extends \BaseController {
 	public function create()
 	{
 		//create a post
-		return "WE IS CREATE";
+		return View::make('posts.create');
 	}
 
 
@@ -33,7 +33,15 @@ class PostsController extends \BaseController {
 	 */
 	public function store()
 	{
-		//store a post
+		if(!Input::has('title') && Input::has('body')){
+			return Redirect::back()->withInput();
+		}
+
+		$posts = new Post();
+		$posts->title = Input::get('title');
+		$posts->body = Input::get('body');
+		$posts->save();
+		return Redirect::action('PostsController@index');
 	}
 
 
@@ -45,8 +53,8 @@ class PostsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//show a post
-		return "we be show";
+		$post = Post::find($id);
+		return View::make('posts.show')->with('post', $post);
 	}
 
 
@@ -58,8 +66,10 @@ class PostsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//edit a post
-		return "edit";
+		$post = Post::find($id);
+		return View::make('posts.edit')->with('post', $post);
+
+
 	}
 
 
@@ -71,7 +81,11 @@ class PostsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//update a post
+		$post = Post::find($id);
+		$post->title = Input::get('title');
+		$post->body = Input::get('body');
+		$post->save();
+		return Redirect::action('PostsController@show', array($id));
 	}
 
 
@@ -83,7 +97,9 @@ class PostsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//delete a post
+		$posts = Post::find($id);
+		$posts->delete;
+		return Redirect::action('PostsController@index');
 	}
 
 

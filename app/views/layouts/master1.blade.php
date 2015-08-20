@@ -1,0 +1,9 @@
+<html>
+<head>
+	<title>Test</title>
+	@yield('head')
+</head>
+<body>
+	@yield('content')
+</body>
+</html>
