@@ -11,15 +11,8 @@
 |
 */
 
-Route::get('/portfolio', function()
-{
-	return View::make('portfolio');
-});
-
-Route::get('/resume', function()
-{
-	return View::make('resume');
-});
+Route::get('/resume', 'HomeController@resume');
+Route::get('/portfolio', 'HomeController@portfolio');
 
 Route::get('/rolldice/{guess}', function($guess)
 {
@@ -27,22 +20,10 @@ Route::get('/rolldice/{guess}', function($guess)
 	return View::make('roll-dice')->with($data);
 });
 
-Route::get('/', function()
-{
-	return View::make('index');
-});
+Route::get('/home', 'HomeController@showWelcome');
+Route::get('/', 'HomeController@index');
+Route::get('/about', 'HomeController@about');
+Route::get('/contact', 'HomeController@contact');
+Route::get('/post', 'HomeController@post');
 
-Route::get('/about', function()
-{
-	return View::make('about');
-});
 
-Route::get('/contact', function()
-{
-	return View::make('contact');
-});
-
-Route::get('/post', function()
-{
-	return View::make('post');
-});

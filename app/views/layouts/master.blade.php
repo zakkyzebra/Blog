@@ -39,23 +39,23 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Start Bootstrap</a>
+                <a class="navbar-brand" href="{{{ action('HomeController@index') }}}">Start Bootstrap</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="/">Home</a>
+                        <a href="{{{ action('HomeController@index') }}}">Home</a>
                     </li>
                     <li>
-                        <a href="about">About</a>
+                        <a href="{{{ action('HomeController@about') }}}">About</a>
                     </li>
                     <li>
-                        <a href="post">Sample Post</a>
+                        <a href="{{{ action('HomeController@post') }}}">Sample Post</a>
                     </li>
                     <li>
-                        <a href="contact">Contact</a>
+                        <a href="{{{ action('HomeController@contact') }}}">Contact</a>
                     </li>
                 </ul>
             </div>
