@@ -13,6 +13,14 @@
 
 Route::get('/resume', 'HomeController@resume');
 Route::get('/portfolio', 'HomeController@portfolio');
+Route::get('/home', 'HomeController@showWelcome');
+Route::get('/', 'HomeController@index');
+Route::get('/about', 'HomeController@about');
+Route::get('/contact', 'HomeController@contact');
+Route::get('/post', 'HomeController@post');
+
+Route::resource('posts', 'PostsController');
+
 
 Route::get('/rolldice/{guess}', function($guess)
 {
@@ -20,10 +28,5 @@ Route::get('/rolldice/{guess}', function($guess)
 	return View::make('roll-dice')->with($data);
 });
 
-Route::get('/home', 'HomeController@showWelcome');
-Route::get('/', 'HomeController@index');
-Route::get('/about', 'HomeController@about');
-Route::get('/contact', 'HomeController@contact');
-Route::get('/post', 'HomeController@post');
 
 
