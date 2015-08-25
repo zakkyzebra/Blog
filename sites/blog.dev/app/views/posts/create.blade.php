@@ -1,14 +1,18 @@
 @extends('layouts.master')
 
-
 @section('content')
 
 	<div class="container topSpace">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-				{{ $errors->first('title', '<div class="help-block">:message</div>') }}
-
-				{{ $errors->first('body', '<div class="help-block">:message</div>') }}
+                @if (Session::has('errorMessage'))
+                    <div class="">{{{Session::get('errorMessage')}}}
+                @endif
+                @if($errors->has())        
+                    {{ $errors->first('title', '<div class="help-block">:message</div>') }}
+    				{{ $errors->first('description', '<div class="help-block">:message</div>') }}
+    				{{ $errors->first('body', '<div class="help-block">:message</div>') }}
+                @endif
                 <p>Submit a new blog post</p>
 				{{ Form::open(array('action' => 'PostsController@store')) }}
 					<div class="row control-group">

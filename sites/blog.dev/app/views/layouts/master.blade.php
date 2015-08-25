@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    @yield('head')
     <style>
         img{
             margin-left: auto;
@@ -30,7 +29,9 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    
 
+    @yield('head')
     <!-- php5 Shim and Respond.js IE8 support of php5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -39,6 +40,51 @@
     <![endif]-->
 </head>
 <body>
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" 
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" 
+                   data-dismiss="modal">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Please Login to Continue
+                </h4>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label  class="col-sm-2 control-label"for="inputEmail3">Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="inputPassword3" >Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputPassword3" placeholder="Password"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                Close
+                            </button>
+                            <button type="submit" class="btn btn-default">Sign in</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 	<!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-custom navbar-fixed-top">
         <div class="container-fluid">
@@ -67,6 +113,13 @@
                     </li>
                     <li>
                         <a href="{{{ action('HomeController@contact') }}}">Contact</a>
+                    </li>
+                    <li>
+                        @if(Auth::check())   
+                            <a href="{{{ action('HomeController@doLogout') }}}" class="btn btn-primary white-text" >Logout</a>
+                        @else
+                            <a href="{{{ action('HomeController@showLogin') }}}" class="btn btn-primary white-text" >Login</a>
+                        @endif
                     </li>
                 </ul>
             </div>

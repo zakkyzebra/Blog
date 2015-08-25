@@ -120,6 +120,9 @@ hr.small {
   .navbar-custom.is-fixed .nav li a {
     color: #A8966E;
   }
+  .navbar-custom.is-fixed .nav li a.white-text {
+    color: #FFFFFF;
+  }
   .navbar-custom.is-fixed .nav li a:hover,
   .navbar-custom.is-fixed .nav li a:focus {
     color: #FFFFFF;
@@ -380,7 +383,7 @@ form .row:first-child .floating-label-form-group {
   background: #0085a1;
 }
 ::selection {
-  color: white;
+  color: #A8966E;
   text-shadow: none;
   background: #0085a1;
 }
