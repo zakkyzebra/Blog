@@ -11,7 +11,29 @@
 |
 */
 
-Route::get('/', function()
+Route::get('/resume', 'HomeController@resume');
+Route::get('/portfolio', 'HomeController@portfolio');
+Route::get('/home', 'HomeController@showWelcome');
+
+Route::get('/', 'PostsController@index');
+Route::get('/about', 'HomeController@about');
+Route::get('/contact', 'HomeController@contact');
+Route::get('/post', 'HomeController@post');
+
+Route::resource('posts', 'PostsController');
+
+
+Route::get('/rolldice/{guess}', function($guess)
 {
-	return View::make('hello');
+    $data = array('guess' => $guess);
+	return View::make('roll-dice')->with($data);
 });
+
+Route::get('orm-test', function ()
+{
+	$posts = Post::all();
+	return $posts;
+});
+
+
+
