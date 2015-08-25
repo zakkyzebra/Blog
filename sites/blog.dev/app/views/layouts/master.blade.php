@@ -63,7 +63,7 @@
                         <a href="{{{ action('HomeController@about') }}}">About</a>
                     </li>
                     <li>
-                        <a href="{{{ action('HomeController@post') }}}">Sample Post</a>
+                        <a href="{{{ action('PostsController@create') }}}">New Post</a>
                     </li>
                     <li>
                         <a href="{{{ action('HomeController@contact') }}}">Contact</a>

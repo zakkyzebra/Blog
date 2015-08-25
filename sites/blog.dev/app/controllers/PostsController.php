@@ -9,7 +9,8 @@ class PostsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$posts = Post::paginate(4);
+		
+		$posts = Post::with('user')->paginate(4);
 		return View::make('posts.index')->with(['posts'=> $posts]);
 	}
 
@@ -39,6 +40,7 @@ class PostsController extends \BaseController {
 			$posts = new Post();
 			$posts->title = Input::get('title');
 			$posts->body = Input::get('body');
+			$posts->user_id = 1;
 			$posts->description = Input::get('description');
 			$posts->save();
 			return Redirect::action('PostsController@index');
@@ -98,7 +100,7 @@ class PostsController extends \BaseController {
 			$post->body = Input::get('body');
 			$post->description = Input::get('description');
 			$post->save();
-			return Redirect::action('PostsController@index', array($id));
+			return Redirect::action('PostsController@show', array($id));
 		}
 	}
 

@@ -23,9 +23,9 @@
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     {{ $post->body }}
                 </div>
+                <a class="btn btn-primary" href="{{{ action('PostsController@edit', $post->id) }}}"><span class="glyphicon glyphicon-pencil"></span></a>
+                <button id="delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
             </div>
-            <a class="btn btn-primary" href="{{{ action('PostsController@edit', $post->id) }}}"><span class="glyphicon glyphicon-pencil"></span></a>
-            <button id="delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
             {{ Form::open(array('action' => array('PostsController@destroy', $post->id), 'method' => 'DELETE', 'id' => 'formDelete')) }}
             {{ Form::close() }}
         </div>
