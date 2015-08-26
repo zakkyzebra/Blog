@@ -10,15 +10,23 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
+//exercises
 Route::get('/resume', 'HomeController@resume');
 Route::get('/portfolio', 'HomeController@portfolio');
 Route::get('/home', 'HomeController@showWelcome');
-Route::get('/', 'HomeController@index');
+
+//navbar routes
+Route::get('/', 'PostsController@index');
 Route::get('/about', 'HomeController@about');
 Route::get('/contact', 'HomeController@contact');
 Route::get('/post', 'HomeController@post');
 
+//login routes
+Route::get('/login', 'HomeController@showLogin');
+Route::post('/login', 'HomeController@doLogin');
+Route::get('/logout', 'HomeController@doLogout');
+
+//posts routes
 Route::resource('posts', 'PostsController');
 
 

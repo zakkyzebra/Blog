@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('header')
-	<header class="intro-header" style="background-image: url('img/home-bg.jpg')">
+    <header class="intro-header" style="background-image: url('img/home-bg.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -21,10 +21,26 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-preview">
-                    <a href="post.php">
-                        <h2 class="post-title">
-                            Man must explore, and this is exploration at its greatest
+                    {{ $posts->links() }}
+                    @foreach ($posts as $post)
+                        <div class="post-preview">
+                            <a href="post.php">
+                                <h2 class="post-title">
+                                    Title: {{$post->title}}
+                                </h2>
+                                <h3 class="post-subtitle">
+                                    Body: {{$post->description}}
+                                </h3>
+                            </a>
+                            <p class="post-meta">Created on
+                                Created: {{$post->created_at}}<br>
+                            </p>
+                            <p class="post-meta">Created on
+                                Created: {{$post->updated_at}}<br>
+                            </p>
+                    @endforeach
+
+
                         </h2>
                         <h3 class="post-subtitle">
                             Problems look mighty small from 150 miles up

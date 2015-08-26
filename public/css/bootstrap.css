@@ -12,6 +12,7 @@ html {
 }
 body {
   margin: 0;
+  background-color: #eae1cc;
 }
 article,
 aside,
@@ -116,7 +117,7 @@ select,
 textarea {
   margin: 0;
   font: inherit;
-  color: inherit;
+  color: 8A7A53;
 }
 button {
   overflow: visible;
@@ -1101,7 +1102,7 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #337ab7;
+  color: #FFFFFF;
   text-decoration: none;
 }
 a:hover,
@@ -1191,7 +1192,7 @@ h6,
   font-family: inherit;
   font-weight: 500;
   line-height: 1.1;
-  color: inherit;
+  color: 8A7A53;
 }
 h1 small,
 h2 small,
@@ -2898,7 +2899,7 @@ select[multiple].form-group-lg .form-control {
   display: block;
   margin-top: 5px;
   margin-bottom: 10px;
-  color: #737373;
+  color: red;
 }
 @media (min-width: 768px) {
   .form-inline .form-group {
@@ -4492,11 +4493,11 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #ccc;
 }
 .navbar-inverse {
-  background-color: #222;
-  border-color: #080808;
+  background-color: #eae1cc;
+  border-color: #eae1cc;
 }
 .navbar-inverse .navbar-brand {
-  color: #9d9d9d;
+  color: #A8966E;
 }
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
@@ -4507,7 +4508,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #9d9d9d;
 }
 .navbar-inverse .navbar-nav > li > a {
-  color: #9d9d9d;
+  color: #A8966E;
 }
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
@@ -4527,14 +4528,14 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   background-color: transparent;
 }
 .navbar-inverse .navbar-toggle {
-  border-color: #333;
+  border-color: #A8966E;
 }
 .navbar-inverse .navbar-toggle:hover,
 .navbar-inverse .navbar-toggle:focus {
   background-color: #333;
 }
 .navbar-inverse .navbar-toggle .icon-bar {
-  background-color: #fff;
+  background-color: #A8966E;
 }
 .navbar-inverse .navbar-collapse,
 .navbar-inverse .navbar-form {

@@ -8,6 +8,7 @@ body {
   font-family: 'Lora', 'Times New Roman', serif;
   font-size: 20px;
   color: #404040;
+  background-color: #eae1cc;
 }
 p {
   line-height: 1.5;
@@ -103,25 +104,28 @@ hr.small {
     /* when the user scrolls down, we hide the header right above the viewport */
     position: fixed;
     top: -61px;
-    background-color: rgb(0, 0, 0);
+    background-color: #eae1cc;
     border-bottom: 1px solid #f2f2f2;
     -webkit-transition: -webkit-transform 0.3s;
     -moz-transition: -moz-transform 0.3s;
     transition: transform 0.3s;
   }
   .navbar-custom.is-fixed .navbar-brand {
-    color: #FFFFFF;
+    color: #A8966E;
   }
   .navbar-custom.is-fixed .navbar-brand:hover,
   .navbar-custom.is-fixed .navbar-brand:focus {
-    color: #0085a1;
+    color: #FFFFFF;
   }
   .navbar-custom.is-fixed .nav li a {
+    color: #A8966E;
+  }
+  .navbar-custom.is-fixed .nav li a.white-text {
     color: #FFFFFF;
   }
   .navbar-custom.is-fixed .nav li a:hover,
   .navbar-custom.is-fixed .nav li a:focus {
-    color: #0085a1;
+    color: #FFFFFF;
   }
   .navbar-custom.is-visible {
     /* if the user changes the scrolling direction, we show the header */
@@ -147,6 +151,7 @@ hr.small {
 .intro-header .page-heading {
   padding: 100px 0 50px;
   color: white;
+  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 @media only screen and (min-width: 768px) {
   .intro-header .site-heading,
@@ -211,12 +216,12 @@ hr.small {
   }
 }
 .post-preview > a {
-  color: #404040;
+  color: #A8966E;
 }
 .post-preview > a:hover,
 .post-preview > a:focus {
   text-decoration: none;
-  color: #0085a1;
+  color: #FFFFFF;
 }
 .post-preview > a > .post-title {
   font-size: 30px;
@@ -240,7 +245,7 @@ hr.small {
 }
 .post-preview > .post-meta > a:hover,
 .post-preview > .post-meta > a:focus {
-  color: #0085a1;
+  color: #A8966E;
   text-decoration: underline;
 }
 @media only screen and (min-width: 768px) {
@@ -378,7 +383,7 @@ form .row:first-child .floating-label-form-group {
   background: #0085a1;
 }
 ::selection {
-  color: white;
+  color: #A8966E;
   text-shadow: none;
   background: #0085a1;
 }

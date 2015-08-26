@@ -2,6 +2,12 @@
 
 class PostsController extends \BaseController {
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->beforeFilter('auth', array('except' => array('index', 'show')));
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -9,8 +15,23 @@ class PostsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$posts = Post::all();
-		return View::make('posts.index')->with(['posts'=> $posts]);
+		if(Input::has('search')){
+			//PAGINATES QUERY
+			$query = Post::with('user');
+			$query->orWhereHas('user', function($q){
+				$search = Input::get('search');
+				$q->where('title', 'like', "%$search%");
+			});
+
+			// $query = Post::with('user');
+
+			$posts = $query->orderBy('created_at', 'desc')->paginate(4);
+			return View::make('posts.index')->with(['posts'=> $posts]);
+		}else{
+			//PAGINATES ALL
+			$posts = Post::with('user')->paginate(4);
+			return View::make('posts.index')->with(['posts'=> $posts]);
+		}
 	}
 
 
@@ -24,8 +45,7 @@ class PostsController extends \BaseController {
 		//create a post
 		return View::make('posts.create');
 	}
-
-
+	
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -33,15 +53,20 @@ class PostsController extends \BaseController {
 	 */
 	public function store()
 	{
-		if(!Input::has('title') && Input::has('body')){
-			return Redirect::back()->withInput();
+		$validator = Validator::make(Input::all(), Post::$rules);
+		if($validator->fails()){
+			Session::flash('errorMessage', 'Something went wrong, refer to the red text below:');
+			Log::info('validator failed', Input::all());
+			return Redirect::back()->withInput()->withErrors($validator);
+		}else{
+			$posts = new Post();
+			$posts->title = Input::get('title');
+			$posts->body = Input::get('body');
+			$posts->user_id = Auth::id();
+			$posts->description = Input::get('description');
+			$posts->save();
+			return Redirect::action('PostsController@index');
 		}
-
-		$posts = new Post();
-		$posts->title = Input::get('title');
-		$posts->body = Input::get('body');
-		$posts->save();
-		return Redirect::action('PostsController@index');
 	}
 
 
@@ -53,8 +78,12 @@ class PostsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$post = Post::find($id);
-		return View::make('posts.show')->with('post', $post);
+		if(Post::find($id)){		
+			$post = Post::find($id);
+			return View::make('posts.show')->with('post', $post);
+		}else{
+			App::abort(404);
+		}
 	}
 
 
@@ -68,8 +97,6 @@ class PostsController extends \BaseController {
 	{
 		$post = Post::find($id);
 		return View::make('posts.edit')->with('post', $post);
-
-
 	}
 
 
@@ -81,11 +108,17 @@ class PostsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$post = Post::find($id);
-		$post->title = Input::get('title');
-		$post->body = Input::get('body');
-		$post->save();
-		return Redirect::action('PostsController@show', array($id));
+		$validator = Validator::make(Input::all(), Post::$rules);
+		if($validator->fails()){
+			return Redirect::back()->withInput()->withErrors($validator);
+		}else{
+			$post = Post::find($id);
+			$post->title = Input::get('title');
+			$post->body = Input::get('body');
+			$post->description = Input::get('description');
+			$post->save();
+			return Redirect::action('PostsController@show', array($id));
+		}
 	}
 
 
@@ -98,7 +131,7 @@ class PostsController extends \BaseController {
 	public function destroy($id)
 	{
 		$posts = Post::find($id);
-		$posts->delete;
+		$posts->delete();
 		return Redirect::action('PostsController@index');
 	}
 
