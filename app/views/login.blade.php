@@ -15,7 +15,7 @@
                 @if (Session::has('errorMessage'))
                     <div class="help-block">{{{Session::get('errorMessage')}}} </div>
                 @endif
-                <p>Login below</p>
+                <p>Login</p>
 				{{ Form::open(array('action' => 'HomeController@doLogin')) }}
 					<div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
@@ -26,7 +26,7 @@
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label>Password</label>
-                            <input type="textarea" name="password" class="form-control" placeholder="Password" id="password">
+                            <input type="password" name="password" class="form-control" placeholder="Password" id="password">
                         </div>
                     </div>
                     <br>

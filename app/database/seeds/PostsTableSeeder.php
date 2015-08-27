@@ -6,7 +6,7 @@
 
 
             //add these posts
-            for($i=0; $i<30; $i++){
+            for($i=0; $i<100; $i++){
                 $post1 = new Post();
                 $post1->title = strtoupper($faker->bs);
                 $post1->body  = $faker->text(2000);

@@ -9,6 +9,7 @@
                         <h1>{{ $post->title }}</h1>
                         <h2 class="subheading">{{ $post->description }}</h2>
                         <span class="meta">Posted on {{ $post->created_at}}</span>
+                        <span class="meta">Written by <a href="/?user={{$post->user->username}}">{{ $post->user->first_name}}</a></span>
                     </div>
                 </div>
             </div>
@@ -17,14 +18,20 @@
 @stop
 
 @section('content')
-	<article>
+    <article>
         <div class="container">
             <div class="row">
+                    @if (Session::has('errorMessage'))
+                        <div class="help-block">{{{Session::get('errorMessage')}}} </div>
+                    @endif
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     {{ $post->body }}
                 </div>
-                <a class="btn btn-primary" href="{{{ action('PostsController@edit', $post->id) }}}"><span class="glyphicon glyphicon-pencil"></span></a>
-                <button id="delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+                @if(Auth::check() && Auth::user()->id === $post->user_id)
+                    <a class="btn btn-primary" href="{{{ action('PostsController@edit', $post->id) }}}"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <button id="delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+                @endif
+
             </div>
             {{ Form::open(array('action' => array('PostsController@destroy', $post->id), 'method' => 'DELETE', 'id' => 'formDelete')) }}
             {{ Form::close() }}

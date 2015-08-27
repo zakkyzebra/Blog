@@ -21,10 +21,12 @@ Route::get('/about', 'HomeController@about');
 Route::get('/contact', 'HomeController@contact');
 Route::get('/post', 'HomeController@post');
 
-//login routes
+//user routes
 Route::get('/login', 'HomeController@showLogin');
 Route::post('/login', 'HomeController@doLogin');
 Route::get('/logout', 'HomeController@doLogout');
+Route::get('/usercreate', 'HomeController@showCreate');
+Route::post('/usercreate', 'HomeController@newUser');
 
 //posts routes
 Route::resource('posts', 'PostsController');
@@ -38,8 +40,7 @@ Route::get('/rolldice/{guess}', function($guess)
 
 Route::get('orm-test', function ()
 {
-	$posts = Post::all();
-	return $posts;
+	View::make();
 });
 
 

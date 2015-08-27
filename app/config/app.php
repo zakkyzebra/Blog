@@ -13,7 +13,10 @@ return array(
 	|
 	*/
 
-	'debug' => false,
+	'debug' => true,
+	'providers' => append_config(array(
+		'Barryvdh\Debugbar\ServiceProvider',
+	)),
 
 	/*
 	|--------------------------------------------------------------------------

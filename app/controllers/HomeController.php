@@ -79,8 +79,48 @@ class HomeController extends BaseController {
 	public function doLogout()
 	{
 		Auth::logout();
-		//Session flash for logout
+		Session::flash('logoutMessage', 'Goodbye!');
 		return Redirect::to('/');
 	}
+	public function showCreate()
+	{
+		if(!Auth::check()){
+			return View::make('new_user');
+		}else{
+			return Redirect::action('PostsController@index');
+		}
+	}
 
+	public function newUser()
+	{
+		$validator = Validator::make(Input::all(), User::$rules);
+		if($validator->fails()){
+			Session::flash('errorMessage', 'Something went wrong, refer to the red text below:');
+			Log::info('validator failed', Input::all());
+			return Redirect::back()->withInput()->withErrors($validator);
+		}else{
+			if(Input::get('password') === Input::get('confirmPassword')){
+				if(Input::get('password') === Input::get('confirmPassword')){	
+					$user = new User();
+					$user->username = Input::get('username');
+					$user->first_name = Input::get('first_name');
+					$user->last_name = Input::get('last_name');
+					$user->email = Input::get('email');
+					$user->password = Input::get('password');
+					$user->save();
+
+					$email = Input::get('email');
+					$password = Input::get('password');
+					Auth::attempt(array('email' => $email, 'password' => $password));
+					return Redirect::action('PostsController@index');
+				}else{
+					Session::flash('errorPassword', 'Passwords do not match');
+					return Redirect::back()->withInput();
+				}
+
+			}
+		
+		}
+
+	}
 }
