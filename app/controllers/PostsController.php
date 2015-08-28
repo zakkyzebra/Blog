@@ -61,22 +61,18 @@ class PostsController extends \BaseController {
 	 */
 	public function store()
 	{
-		if(Auth::user()->username === "Zakkyzebra"){		
-			$validator = Validator::make(Input::all(), Post::$rules);
-			if($validator->fails()){
-				Session::flash('errorMessage', 'Something went wrong, refer to the red text below:');
-				Log::info('validator failed', Input::all());
-				return Redirect::back()->withInput()->withErrors($validator);
-			}else{
-				$posts = new Post();
-				$posts->title = Input::get('title');
-				$posts->body = Input::get('body');
-				$posts->user_id = Auth::id();
-				$posts->description = Input::get('description');
-				$posts->save();
-				return Redirect::action('PostsController@index');
-			}
+		$validator = Validator::make(Input::all(), Post::$rules);
+		if($validator->fails()){
+			Session::flash('errorMessage', 'Something went wrong, refer to the red text below:');
+			Log::info('validator failed', Input::all());
+			return Redirect::back()->withInput()->withErrors($validator);
 		}else{
+			$posts = new Post();
+			$posts->title = Input::get('title');
+			$posts->body = Input::get('body');
+			$posts->user_id = Auth::id();
+			$posts->description = Input::get('description');
+			$posts->save();
 			return Redirect::action('PostsController@index');
 		}
 	}
