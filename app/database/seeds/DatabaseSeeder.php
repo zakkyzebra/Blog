@@ -13,7 +13,6 @@
 			DB::table('users')->delete();
 			$this->call('UsersTableSeeder');
 			$this->call('PostsTableSeeder');
-			$this->call('CommentsTableSeeder');
 		}
 	}
 ?>
