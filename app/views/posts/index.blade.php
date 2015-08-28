@@ -10,7 +10,7 @@
                             @if (Session::has('updatedProfile'))
                                 <div class="">{{{Session::get('updatedProfile')}}} </div>
                             @elseif(Input::has('user'))
-                                {{-- {{$posts->user->first_name}}'s Post --}}
+                                {{Input::get('user')}}}}'s Post
                             @elseif(Input::has('search'))
                                 Searching for: {{Input::get('search')}}
                             @elseif(Auth::check())
@@ -32,7 +32,6 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                                                                                                        {{var_dump($posts)}}
                 @forelse ($posts as $post)
                     <div class="post-preview">
                         <a href="posts/{{ $post->id }}">
