@@ -22,6 +22,8 @@ Route::get('/contact', 'HomeController@contact');
 Route::get('/post', 'HomeController@post');
 
 //user routes
+Route::post('posts/{id}/comment', 'PostsController@storeComment');
+Route::get('posts/{id}/comment', 'PostsController@show');
 Route::get('/login', 'UsersController@showLogin');
 Route::post('/login', 'UsersController@doLogin');
 Route::get('/logout', 'UsersController@doLogout');
@@ -29,6 +31,7 @@ Route::get('/usercreate', 'UsersController@showCreate');
 Route::post('/usercreate', 'UsersController@newUser');
 Route::get('/editprofile', 'UsersController@showEdit');
 Route::put('/editprofile', 'UsersController@editProfile');
+Route::delete('/posts/{id}', 'PostsController@deleteComment');
 
 //posts routes
 Route::resource('posts', 'PostsController');

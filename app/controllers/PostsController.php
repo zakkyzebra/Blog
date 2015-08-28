@@ -61,18 +61,22 @@ class PostsController extends \BaseController {
 	 */
 	public function store()
 	{
-		$validator = Validator::make(Input::all(), Post::$rules);
-		if($validator->fails()){
-			Session::flash('errorMessage', 'Something went wrong, refer to the red text below:');
-			Log::info('validator failed', Input::all());
-			return Redirect::back()->withInput()->withErrors($validator);
+		if(Auth::user()->username === "Zakkyzebra"){		
+			$validator = Validator::make(Input::all(), Post::$rules);
+			if($validator->fails()){
+				Session::flash('errorMessage', 'Something went wrong, refer to the red text below:');
+				Log::info('validator failed', Input::all());
+				return Redirect::back()->withInput()->withErrors($validator);
+			}else{
+				$posts = new Post();
+				$posts->title = Input::get('title');
+				$posts->body = Input::get('body');
+				$posts->user_id = Auth::id();
+				$posts->description = Input::get('description');
+				$posts->save();
+				return Redirect::action('PostsController@index');
+			}
 		}else{
-			$posts = new Post();
-			$posts->title = Input::get('title');
-			$posts->body = Input::get('body');
-			$posts->user_id = Auth::id();
-			$posts->description = Input::get('description');
-			$posts->save();
 			return Redirect::action('PostsController@index');
 		}
 	}
@@ -151,6 +155,36 @@ class PostsController extends \BaseController {
 			Session::flash('errorMessage', 'Can not delete a post that is not yours.');
 			return View::make('posts.show')->with('post', $post);
 		}
+	}
+	
+	public function storeComment($post_id)
+	{
+		// create the validator
+	    $validator = Validator::make(Input::all(), Comment::$rules);
+	    // attempt validation
+	    if ($validator->fails()) {
+	        // validation failed, redirect to the post create page with validation errors and old inputs
+	        Session::flash('errorMessage', 'Your comment was not successfully created. See errors below:');
+	        return Redirect::back()->withInput()->withErrors($validator);
+	    } else {
+	        // validation succeeded, create and save the comment
+	        $comment = new Comment();
+            $comment->post_id = $post_id;
+            $comment->user_id = Auth::id();
+            $comment->comment  = Input::get('comment');
+            $comment->save();
+			Session::flash('successMessage', 'Comment added');
+			$post = Post::find($post_id);
+			return Redirect::back()->with('post', $post);;
+	    }
+	}
+
+	public function deleteComment($commentid)
+	{
+		$comment = Comment::find($commentid);
+		$comment->delete();
+		Session::flash('successMessage', 'Comment deleted');
+		return Redirect::back();
 	}
 
 
