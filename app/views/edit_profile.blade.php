@@ -19,10 +19,11 @@
                     {{ $errors->first('email', '<div class="help-block">:message</div>') }}
                     {{ $errors->first('password', '<div class="help-block">:message</div>') }}
                 @endif
-                <p>Edit profile</p>
+                <h1>Edit profile</h1>
                 {{ Form::model($user,array('action' => array('UsersController@editProfile'), 'method' => 'PUT')) }}
 					<div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <h4>Change Name</h4>
                             <label>First name</label>
                             <input type="text" name="first_name" class="form-control" placeholder="First name" value="{{$user->first_name}}"  id="first_name">
                         </div>
@@ -32,9 +33,10 @@
                             <label>Last name</label>
                             <input type="text" name="last_name" class="form-control" placeholder="Last name" value="{{$user->last_name}}"  id="last_name">
                         </div>
-                    </div>
+                    </div><br>
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <h4>Change Email</h4>
                             <label>Change Email</label>
                             <input type="text" name="email" class="form-control" placeholder="Email" id="email">
                         </div>
@@ -44,9 +46,10 @@
                             <label>Email confirmation</label>
                             <input type="text" name="email_confirmation" class="form-control" placeholder="Email Confirmation"  id="email_confirmation">
                         </div>
-                    </div>
+                    </div><br>
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <h4>Change Password</h4>
                             <label>Current Password</label>
                             <input type="password" name="current_password" class="form-control" placeholder="Current Password"  id="current_password">
                         </div>
@@ -66,7 +69,7 @@
                     <br>
                     <div class="row">
                         <div class="form-group col-xs-12">
-                            <button class="btn btn-default">Post</button>
+                            <button class="btn btn-default">Submit changes</button>
                         </div>
                     </div>
                 {{ Form::close() }}
