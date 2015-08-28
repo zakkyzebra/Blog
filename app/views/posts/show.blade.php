@@ -63,13 +63,6 @@
                     <small>{{{$comment->created_at->setTimezone('America/Chicago')->format('l, F jS Y @ h:i:s a')}}}</small>
                 </h4>
                 {{{$comment->comment}}}
-                @if(Auth::check() && Auth::user()->id === $comment->user_id)
-                    <a class="btn btn-primary" href="{{{ action('PostsController@deleteComment', $comment->id) }}}"><span class="glyphicon glyphicon-pencil"></span></a>
-                    <button id="deleteComment" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
-                @endif
-
-            {{ Form::open(array('action' => array('PostsController@deleteComment', $comment->id), 'method' => 'DELETE', 'id' => 'commentDelete')) }}
-            {{ Form::close() }}
             </div>
         </div>
 
@@ -91,15 +84,7 @@
                     document.getElementById("formDelete").submit();
                     console.log('formsubmit');
                 }
-            });
-            $('#deleteComment').on('click', function(){
-                var onConfirm = confirm('Are you sure you want to delete?');
-                console.log(onConfirm);
-                if(onConfirm){
-                    document.getElementById("commentDelete").submit();
-                    console.log('formsubmit');
-                }
-            });
+            })
         })();
     </script>
 @stop
