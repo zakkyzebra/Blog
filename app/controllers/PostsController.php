@@ -175,13 +175,13 @@ class PostsController extends \BaseController {
 	    }
 	}
 
-	public function deleteComment($commentid)
-	{
-		$comment = Comment::find($commentid);
-		$comment->delete();
-		Session::flash('successMessage', 'Comment deleted');
-		return Redirect::back();
-	}
+	// public function deleteComment($commentid)
+	// {
+	// 	$comment = Comment::find($commentid);
+	// 	$comment->delete();
+	// 	Session::flash('successMessage', 'Comment deleted');
+	// 	return Redirect::back();
+	// }
 
 
 }
