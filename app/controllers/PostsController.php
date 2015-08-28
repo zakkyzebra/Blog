@@ -28,16 +28,16 @@ class PostsController extends \BaseController {
 		}elseif (Input::has('user')){
 			$query = Post::with('user');
 			$query->WhereHas('user', function($q){
-				$search = Input::get('user');
-				$q->where('username', '=', "$search");
+				$username = Input::get('user');
+				$q->where('username', "$username");
 			});
 			
 			$posts = $query->orderBy('created_at', 'desc')->paginate(4);
 			return View::make('posts.index')->with(['posts'=> $posts]);
 		}else{
 			//PAGINATES ALL
-			
-			$posts = Post::with('user')->paginate(4);
+
+			$posts = Post::with('user')->orderBy('updated_at', 'desc')->paginate(4);
 			return View::make('posts.index')->with(['posts'=> $posts]);
 		}
 	}

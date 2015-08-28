@@ -1,7 +1,8 @@
 @extends('layouts.master')
 
 @section('header')
-	<header class="intro-header" style="background-image: url('http://lorempixel.com/1920/650/')">
+	<header class="intro-header" style="">
+        {{-- background-image: url('http://lorempixel.com/1920/650/') --}}
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">

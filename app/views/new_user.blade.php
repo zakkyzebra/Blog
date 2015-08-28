@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('head')
+	<link href="/css/navbar.css" rel="stylesheet">
+@stop
+
 @section('content')
 	<div class="container topSpace">
         <div class="row">
@@ -16,7 +20,7 @@
     				{{ $errors->first('password', '<div class="help-block">:message</div>') }}
                 @endif
                 <p>Create a user</p>
-				{{ Form::open(array('action' => 'HomeController@newUser')) }}
+				{{ Form::open(array('action' => 'UsersController@newUser')) }}
 					*Required
 					<div class="row control-group">
 	                        <div class="form-group col-xs-12 floating-label-form-group controls">

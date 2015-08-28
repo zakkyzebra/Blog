@@ -22,11 +22,13 @@ Route::get('/contact', 'HomeController@contact');
 Route::get('/post', 'HomeController@post');
 
 //user routes
-Route::get('/login', 'HomeController@showLogin');
-Route::post('/login', 'HomeController@doLogin');
-Route::get('/logout', 'HomeController@doLogout');
-Route::get('/usercreate', 'HomeController@showCreate');
-Route::post('/usercreate', 'HomeController@newUser');
+Route::get('/login', 'UsersController@showLogin');
+Route::post('/login', 'UsersController@doLogin');
+Route::get('/logout', 'UsersController@doLogout');
+Route::get('/usercreate', 'UsersController@showCreate');
+Route::post('/usercreate', 'UsersController@newUser');
+Route::get('/editprofile', 'UsersController@showEdit');
+Route::put('/editprofile', 'UsersController@editProfile');
 
 //posts routes
 Route::resource('posts', 'PostsController');

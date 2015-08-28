@@ -7,21 +7,16 @@
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="site-heading">
                         <h1>
-                            @if(Input::has('user'))
-                                {{Input::get('user')}}'s Posts
+                            @if (Session::has('updatedProfile'))
+                                <div class="">{{{Session::get('updatedProfile')}}} </div>
+                            @elseif(Input::has('user'))
+                                {{$posts[0]->user->first_name}}'s Post
                             @elseif(Input::has('search'))
                                 Searching for: {{Input::get('search')}}
                             @elseif(Auth::check())
                                 Welcome, {{ Auth::user()->username }}
-                            @elseif(Session::has('logoutMessage'))
-                                {{{Session::get('logoutMessage')}}}
                             @else
                                 Welcome to BlogBlogBlog
-                            @endif
-
-                            @if (Session::has('logoutMessage'))
-                                <div class="help-block">{{{Session::get('errorEmail')}}} </div>
-                                <div class="help-block">{{{Session::get('errorPassword')}}} </div>
                             @endif
                         </h1>
                         <hr class="small">

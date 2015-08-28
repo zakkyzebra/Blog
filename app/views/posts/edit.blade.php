@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('head')
+    <link href="/css/navbar.css" rel="stylesheet">
+@stop
+
 @section('content')
 
 	<div class="container topSpace">

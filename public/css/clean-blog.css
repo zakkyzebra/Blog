@@ -93,7 +93,7 @@ hr.small {
     -webkit-transition: background-color 0.3s;
     -moz-transition: background-color 0.3s;
     transition: background-color 0.3s;
-    /* Force Hardware Acceleration in WebKit */
+     Force Hardware Acceleration in WebKit 
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
@@ -106,7 +106,7 @@ hr.small {
     /* when the user scrolls down, we hide the header right above the viewport */
     position: fixed;
     top: -65px;
-    background-color: #eae1cc;
+    background-color: #A8966E;
     border-bottom: 1px solid #f2f2f2;
     -webkit-transition: -webkit-transform 0.3s;
     -moz-transition: -moz-transform 0.3s;
@@ -399,4 +399,20 @@ img::-moz-selection {
 }
 body {
   webkit-tap-highlight-color: #0085a1;
+}
+.img404{
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.topSpace{
+    padding-top: 100px;
+}
+.search-bar{
+    color: white;
+    margin-top: 13px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+.extendo{
+    width: 100px;
 }

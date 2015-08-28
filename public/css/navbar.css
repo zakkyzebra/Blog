@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+  background-color: #eae1cc;
+  font-family: 'Lora', 'Times New Roman', serif;
+  font-size: 20px;
+  color: #404040;
+}
+
+@media only screen and (min-width: 768px) {
+  .navbar-custom {
+  	background-color: #A8966E;
+  }
+  .navbar-custom.is-fixed {
+    /* when the user scrolls down, we hide the header right above the viewport */
+    position: fixed;
+    top: -65px;
+    background-color: #A8966E;
+    border-bottom: 1px solid #f2f2f2;
+    -webkit-transition: -webkit-transform 0.3s;
+    -moz-transition: -moz-transform 0.3s;
+    transition: transform 0.3s;
+  }
+  .navbar-custom.is-fixed .navbar-brand {
+    color: #FFFFFF;
+  }
+  .navbar-custom.is-fixed .navbar-brand:hover,
+  .navbar-custom.is-fixed .navbar-brand:focus {
+    color: #FFFFFF;
+  }
+  .navbar-custom.is-fixed .nav li a {
+    color: #FFFFFF;
+  }
+  .navbar-custom.is-fixed .nav li a.white-text {
+    color: #FFFFFF;
+  }
+  .navbar-custom.is-fixed .nav li a:hover,
+  .navbar-custom.is-fixed .nav li a:focus {
+    color: #FFFFFF;
+  }
+  .navbar-custom.is-visible {
+    background-color: #A8966E;
+  }
+}

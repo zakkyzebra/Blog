@@ -1,11 +1,7 @@
 @extends('layouts.master')
 
 @section('head')
-	<style>
-		#userLog{
-			color: white;
-		}
-	</style>
+    <link href="/css/navbar.css" rel="stylesheet">
 @stop
 
 @section('content')
@@ -15,8 +11,11 @@
                 @if (Session::has('errorMessage'))
                     <div class="help-block">{{{Session::get('errorMessage')}}} </div>
                 @endif
+                @if(Session::has('logoutMessage'))
+                    <h1>{{{Session::get('logoutMessage')}}}</h1>
+                @endif
                 <p>Login</p>
-				{{ Form::open(array('action' => 'HomeController@doLogin')) }}
+				{{ Form::open(array('action' => 'UsersController@doLogin')) }}
 					<div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label>Email</label>
@@ -36,6 +35,11 @@
                         </div>
                     </div>
                 {{ Form::close() }}
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <a href="/usercreate" class="btn btn-default pull-right">New User?</a>
+                    </div>
+                </div>
 			</div>
 		</div>
 	</div>

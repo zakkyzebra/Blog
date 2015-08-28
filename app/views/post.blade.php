@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('head')
+    <link href="/css/navbar.css" rel="stylesheet">
+@stop
+
 @section('header')
 	<header class="intro-header" style="background-image: url('img/post-bg.jpg')">
         <div class="container">

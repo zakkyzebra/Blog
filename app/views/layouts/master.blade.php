@@ -1,39 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>
-        img{
-            margin-left: auto;
-            margin-right: auto;
-
-        }
-        .topSpace{
-            padding-top: 100px;
-        }
-        .search-bar{
-            color: white;
-            margin-top: 13px;
-            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-        }
-        .extendo{
-            width: 100px;
-        }
-    </style>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>
-        @if(Input::has('user'))
-            {{Input::get('user')}}'s Posts
-        @elseif(Input::has('search'))
-            BlogBlogBlog: {{Input::get('search')}}
-        @else
-            All blogs posts
-        @endif
-    </title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
@@ -45,9 +18,19 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    
-
     @yield('head')
+    
+    <title>
+        @if(Input::has('user'))
+            {{Input::get('user')}}'s Posts
+        @elseif(Input::has('search'))
+            BlogBlogBlog: {{Input::get('search')}}
+        @else
+            BlogBlogBlog
+        @endif
+    </title>
+
+    <link href="/css/transparent-toggle.css" rel="stylesheet">
     <!-- php5 Shim and Respond.js IE8 support of php5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -93,9 +76,20 @@
                     </li>
                     <li>
                         @if(Auth::check())   
-                            <a href="{{{ action('HomeController@doLogout') }}}" class="btn btn-primary white-text" >Logout</a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Our Collection of Templates &amp; Themes">{{Auth::user()->username}} <b class="caret"></b></a>
+                            <ul class="dropdown-menu transparent">
+                                <li>
+                                    <a href="{{{ action('UsersController@showEdit')}}}" class="btn">Edit Profile</a>
+                                </li>
+                                <li>
+                                    <a href="/?user={{Auth::user()->username}}" class="btn">My Posts</a>
+                                </li>
+                                <li>
+                                    <a href="{{{ action('UsersController@doLogout') }}}" class="btn btn-danger white-text" >Logout</a>
+                                </li>
+                            </ul>
                         @else
-                            <a href="{{{ action('HomeController@showLogin') }}}" class="btn btn-primary white-text" >Login</a>
+                            <a href="{{{ action('UsersController@showLogin') }}}" class="btn btn-primary white-text" >Login</a>
                         @endif
                     </li>
                 </ul>
@@ -106,7 +100,6 @@
     </nav>
 
 	@yield('header')
-
     @yield('content')
 
 <!-- Footer -->
