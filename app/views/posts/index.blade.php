@@ -10,7 +10,8 @@
                             @if (Session::has('updatedProfile'))
                                 <div class="">{{{Session::get('updatedProfile')}}} </div>
                             @elseif(Input::has('user'))
-                                {{$posts->user->first_name}}'s Post
+                                {{-- {{$posts->user->first_name}}'s Post --}}
+                                {{var_dump($posts)}}
                             @elseif(Input::has('search'))
                                 Searching for: {{Input::get('search')}}
                             @elseif(Auth::check())
