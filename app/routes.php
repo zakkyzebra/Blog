@@ -31,9 +31,11 @@ Route::get('/usercreate', 'UsersController@showCreate');
 Route::post('/usercreate', 'UsersController@newUser');
 Route::get('/editprofile', 'UsersController@showEdit');
 Route::put('/editprofile', 'UsersController@editProfile');
+Route::delete('/posts/{postId}/comments/{commentId}', 'PostsController@deleteComment');
+// Route::get('/posts/{postId}/comments/{commentId}', 'PostsController@show');
+
 
 //posts routes
-Route::delete('/posts/{postId}/comments/{commentId}', 'PostsController@deleteComment');
 Route::resource('/posts', 'PostsController');
 
 
