@@ -175,7 +175,7 @@ class PostsController extends \BaseController {
 	    }
 	}
 
-	public function deleteComment($commentid)
+	public function deleteComment($postid,$commentid)
 	{
 		$comment = Comment::find($commentid);
 		$comment->delete();

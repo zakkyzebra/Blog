@@ -65,7 +65,7 @@
                 @if(Auth::check() && Auth::user()->id === $comment->user_id)
                     <button id="deleteComment" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
                 @endif
-            {{ Form::open(array('action' => array('PostsController@deleteComment', $comment->id), 'method' => 'DELETE', 'id' => 'commentDelete')) }}
+            {{ Form::open(array('action' => array('PostsController@deleteComment', $post->id,$comment->id), 'method' => 'DELETE', 'id' => 'commentDelete')) }}
             {{ Form::close() }}
             </div>
         </div>

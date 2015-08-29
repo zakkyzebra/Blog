@@ -32,7 +32,6 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                @if(!empty($posts))
                     @forelse ($posts as $post)
                         <div class="post-preview">
                             <a href="posts/{{ $post->id }}">
@@ -57,14 +56,13 @@
                     @empty
                     <h1 class="help-block">No results found</h1>
                     @endforelse
-                    @if(Input::has('user'))
-                        {{$posts->appends(array('user' => $post->user->username))->links() }}
+                    @if(Input::has('user') && !empty($posts))
+                        {{$posts->appends(array('user' => Input::get('user')))->links() }}
                     @elseif(Input::has('search'))
                         {{$posts->appends(array('search' => Input::get('search')))->links() }}
                     @else
                         {{ $posts->links() }}
                     @endif
-                @endif
             </div>
         </div>
     </div>

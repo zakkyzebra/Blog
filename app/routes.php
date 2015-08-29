@@ -22,8 +22,8 @@ Route::get('/contact', 'HomeController@contact');
 Route::get('/post', 'HomeController@post');
 
 //user routes
-Route::post('posts/{id}/comment', 'PostsController@storeComment');
-Route::get('posts/{id}/comment', 'PostsController@show');
+Route::post('/posts/{id}/comments', 'PostsController@storeComment');
+Route::get('/posts/{id}/comments', 'PostsController@show');
 Route::get('/login', 'UsersController@showLogin');
 Route::post('/login', 'UsersController@doLogin');
 Route::get('/logout', 'UsersController@doLogout');
@@ -33,8 +33,8 @@ Route::get('/editprofile', 'UsersController@showEdit');
 Route::put('/editprofile', 'UsersController@editProfile');
 
 //posts routes
-Route::delete('/posts/{id}', 'PostsController@deleteComment');
-Route::resource('posts', 'PostsController');
+Route::delete('/posts/{postId}/comments/{commentId}', 'PostsController@deleteComment');
+Route::resource('/posts', 'PostsController');
 
 
 Route::get('/rolldice/{guess}', function($guess)
