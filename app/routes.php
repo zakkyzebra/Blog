@@ -32,7 +32,7 @@ Route::post('/usercreate', 'UsersController@newUser');
 Route::get('/editprofile', 'UsersController@showEdit');
 Route::put('/editprofile', 'UsersController@editProfile');
 Route::delete('/posts/{postId}/comments/{commentId}', 'PostsController@deleteComment');
-// Route::get('/posts/{postId}/comments/{commentId}', 'PostsController@show');
+Route::get('/posts/{postId}/comments/{commentId}', 'PostsController@show');
 
 
 //posts routes
