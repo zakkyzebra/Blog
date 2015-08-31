@@ -31,7 +31,7 @@
 					<div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
 								{{ Form::label('first_name', 'First name') }}
-								{{ Form::text('first_name', Input::old('first_name'), array('placeholder' => 'First Name')) }}
+								{{ Form::text('first_name', Input::old('first_name'), array('placeholder' => 'First Name*')) }}
 							</div>
 					</div>
 					<div class="row control-group">
