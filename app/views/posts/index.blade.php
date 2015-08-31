@@ -13,6 +13,8 @@
                                 {{Input::get('user')}}'s Post
                             @elseif(Input::has('search'))
                                 Searching for: {{Input::get('search')}}
+                            @elseif(Input::has('tag'))
+                                Related posts to tag: {{Input::get('tag')}}
                             @elseif(Auth::check())
                                 Welcome, {{ Auth::user()->username }}
                             @else

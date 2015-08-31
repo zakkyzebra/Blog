@@ -34,6 +34,15 @@ class PostsController extends \BaseController {
 			
 			$posts = $query->orderBy('created_at', 'desc')->paginate(4);
 			return View::make('posts.index')->with(['posts'=> $posts]);
+		}elseif(Input::has('tag')){
+			$query = Post::with('tags');
+			$query->WhereHas('tags', function($q){
+				$tag = Input::get('tag');
+				$q->where('name', 'like', "%$tag%");
+			});
+			
+			$posts = $query->orderBy('created_at', 'desc')->paginate(4);
+			return View::make('posts.index')->with(['posts'=> $posts]);
 		}else{
 			//PAGINATES ALL
 
@@ -67,12 +76,15 @@ class PostsController extends \BaseController {
 			Log::info('validator failed', Input::all());
 			return Redirect::back()->withInput()->withErrors($validator);
 		}else{
-			$posts = new Post();
-			$posts->title = Input::get('title');
-			$posts->body = Input::get('body');
-			$posts->user_id = Auth::id();
-			$posts->description = Input::get('description');
-			$posts->save();
+			$post = new Post();
+			$post->title = Input::get('title');
+			$post->body = Input::get('body');
+			$post->user_id = Auth::id();
+			$post->description = Input::get('description');
+			$post->save();
+			$tags = new Tag();
+			$tags->name = Input::get('tags');
+			$tags = $post->tags()->save($tags);
 			return Redirect::action('PostsController@index');
 		}
 	}
@@ -167,7 +179,7 @@ class PostsController extends \BaseController {
 	        $comment = new Comment();
             $comment->post_id = $post_id;
             $comment->user_id = Auth::id();
-            $comment->comment  = Input::get('comment');
+            $comment->comment = Input::get('comment');
             $comment->save();
 			Session::flash('successMessage', 'Comment added');
 			$post = Post::find($post_id);

@@ -1,3 +1,4 @@
+
 /bootstrap/compiled.php
 /vendor
 composer.phar
@@ -5,3 +6,15 @@ composer.phar
 .env.php
 .DS_Store
 Thumbs.db
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+doc/
+*.swp
+*~
+.project
+.DS_Store
+.idea
+
+# Ignore vagrant files
+.vagrant/

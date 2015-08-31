@@ -18,6 +18,8 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/css/jquery.tagsinput.css" />
+    
     @yield('head')
     
     <title>
@@ -129,6 +131,10 @@
       ga('create', 'UA-66843286-1', 'auto');
       ga('send', 'pageview');
 
+    </script>
+    <script src="/js/jquery.tagsinput.js"></script>
+    <script>
+        $('#tags').tagsInput();
     </script>
     @yield('script')
 </body>

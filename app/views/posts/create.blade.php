@@ -37,6 +37,13 @@
                             <textarea class="form-control" name="body" placeholder="Body" rows="15" value="{{{Input::old('body') }}}" id="body"></textarea>
                         </div>
                     </div>
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Tags</label>
+                            <input class="form-control" name="tags" id="tags" value="{{{Input::old('tags')}}}" />
+                        </div>
+                    </div>
+
                     <br>
                     <div class="row">
                         <div class="form-group col-xs-12">
