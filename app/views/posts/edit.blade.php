@@ -19,7 +19,7 @@
                 @endif
                 <p>Edit blog post</p>
 				{{ Form::model($post,array('action' => array('PostsController@update', $post->id), 'method' => 'PUT')) }}
-					<div class="row control-group">
+                    <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label>Title</label>
                             <input type="text" name="title" class="form-control" placeholder="Title" value="{{{ $post->title }}}" id="title">
@@ -35,6 +35,12 @@
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label>Body</label>
                             <textarea class="form-control" rows="15" name="body" placeholder="Body" id="body">{{{$post->body}}}</textarea>
+                        </div>
+                    </div>
+					<div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Tags</label>
+                            <input type="text" name="tags" class="form-control" placeholder="Tags" value="{{{ $post->tags[0]->name }}}" id="tags">
                         </div>
                     </div>
                     <br>
