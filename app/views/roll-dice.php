@@ -13,7 +13,7 @@
 		The number was <?= $guess?>
 	</div>
 	<div>
-		<? if($randomNumber == $guess){
+		<?php if($randomNumber == $guess){
 			echo "You win!";
 		}else{
 			echo "Wow you suck";
