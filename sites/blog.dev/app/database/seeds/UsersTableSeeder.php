@@ -11,6 +11,7 @@
         protected function createEnvUser()
         {
             $user = new User();
+            $user->username = $_ENV['USERNAME'];
             $user->first_name = $_ENV['USER_FIRST_NAME'];
             $user->last_name  = $_ENV['USER_LAST_NAME'];
             $user->email = $_ENV['USER_EMAIL'];
@@ -24,6 +25,7 @@
 
             for($i = 0; $i < 5; $i++){
                 $user = new User();
+                $user->username = $faker->unique()->name;
                 $user->first_name = $faker->firstName;
                 $user->last_name = $faker->lastName;
                 $user->email = $faker->email;

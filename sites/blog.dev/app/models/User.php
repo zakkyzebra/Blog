@@ -20,6 +20,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 	    return $this->hasMany('Post');
 	}
+	public function comments()
+	{
+		return $this->hasMany('Comment');
+	}
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -29,11 +33,20 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	protected $hidden = array('password', 'remember_token');
 
 	public static $rules = array(
-		'email' => 'required|max:128',
-		'email' => 'required|min:1',
-		'password' => 'required|max:128',
-		'password' => 'required|min:1',
+		'username' => 'required|min:2|unique:users|max:20',
+		'first_name' => 'min:2|max:25',
+		'last_name' => 'min:2|max:25',
+		'email' => 'required|min:1|unique:users|max:128|confirmed',
+		'password' => 'required|min:6|max:20|confirmed',
 	);
+	public static $rules2 = array(
+		'username' => 'min:2|unique:users|max:20',
+		'first_name' => 'min:2|max:25',
+		'last_name' => 'min:2|max:25',
+		'email' => 'min:1|unique:users|max:128|confirmed',
+		'password' => 'min:6|max:20|confirmed',
+	);
+
 
 	public function setPasswordAttribute($value)
 	{

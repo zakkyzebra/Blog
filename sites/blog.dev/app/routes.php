@@ -21,13 +21,22 @@ Route::get('/about', 'HomeController@about');
 Route::get('/contact', 'HomeController@contact');
 Route::get('/post', 'HomeController@post');
 
-//login routes
-Route::get('/login', 'HomeController@showLogin');
-Route::post('/login', 'HomeController@doLogin');
-Route::get('/logout', 'HomeController@doLogout');
+//user routes
+Route::post('/posts/{id}/comments', 'PostsController@storeComment');
+Route::get('/posts/{id}/comments', 'PostsController@show');
+Route::get('/login', 'UsersController@showLogin');
+Route::post('/login', 'UsersController@doLogin');
+Route::get('/logout', 'UsersController@doLogout');
+Route::get('/usercreate', 'UsersController@showCreate');
+Route::post('/usercreate', 'UsersController@newUser');
+Route::get('/editprofile', 'UsersController@showEdit');
+Route::put('/editprofile', 'UsersController@editProfile');
+Route::delete('/posts/{postId}/comments/{commentId}', 'PostsController@deleteComment');
+Route::get('/posts/{postId}/comments/{commentId}', 'PostsController@show');
+
 
 //posts routes
-Route::resource('posts', 'PostsController');
+Route::resource('/posts', 'PostsController');
 
 
 Route::get('/rolldice/{guess}', function($guess)
@@ -38,8 +47,7 @@ Route::get('/rolldice/{guess}', function($guess)
 
 Route::get('orm-test', function ()
 {
-	$posts = Post::all();
-	return $posts;
+	View::make();
 });
 
 

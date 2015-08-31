@@ -18,18 +18,26 @@ class PostsController extends \BaseController {
 		if(Input::has('search')){
 			//PAGINATES QUERY
 			$query = Post::with('user');
-			$query->orWhereHas('user', function($q){
+			$query->WhereHas('user', function($q){
 				$search = Input::get('search');
 				$q->where('title', 'like', "%$search%");
 			});
 
-			// $query = Post::with('user');
-
+			$posts = $query->orderBy('created_at', 'desc')->paginate(4);
+			return View::make('posts.index')->with(['posts'=> $posts]);
+		}elseif (Input::has('user')){
+			$query = Post::with('user');
+			$query->WhereHas('user', function($q){
+				$username = Input::get('user');
+				$q->where('username', "$username");
+			});
+			
 			$posts = $query->orderBy('created_at', 'desc')->paginate(4);
 			return View::make('posts.index')->with(['posts'=> $posts]);
 		}else{
 			//PAGINATES ALL
-			$posts = Post::with('user')->paginate(4);
+
+			$posts = Post::with('user')->orderBy('updated_at', 'desc')->paginate(4);
 			return View::make('posts.index')->with(['posts'=> $posts]);
 		}
 	}
@@ -96,7 +104,12 @@ class PostsController extends \BaseController {
 	public function edit($id)
 	{
 		$post = Post::find($id);
-		return View::make('posts.edit')->with('post', $post);
+		if(Auth::check() && Auth::user()->id === $post->user_id){
+			return View::make('posts.edit')->with('post', $post);
+		}else{
+			Session::flash('errorMessage', 'Can not edit a post that is not yours.');
+			return View::make('posts.show')->with('post', $post);
+		}
 	}
 
 
@@ -130,9 +143,44 @@ class PostsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$posts = Post::find($id);
-		$posts->delete();
-		return Redirect::action('PostsController@index');
+		$post = Post::find($id);
+		if(Auth::check() && Auth::user()->id === $post->user_id){
+			$post->delete();
+			return Redirect::action('PostsController@index');
+		}else{
+			Session::flash('errorMessage', 'Can not delete a post that is not yours.');
+			return View::make('posts.show')->with('post', $post);
+		}
+	}
+	
+	public function storeComment($post_id)
+	{
+		// create the validator
+	    $validator = Validator::make(Input::all(), Comment::$rules);
+	    // attempt validation
+	    if ($validator->fails()) {
+	        // validation failed, redirect to the post create page with validation errors and old inputs
+	        Session::flash('errorMessage', 'Your comment was not successfully created. See errors below:');
+	        return Redirect::back()->withInput()->withErrors($validator);
+	    } else {
+	        // validation succeeded, create and save the comment
+	        $comment = new Comment();
+            $comment->post_id = $post_id;
+            $comment->user_id = Auth::id();
+            $comment->comment  = Input::get('comment');
+            $comment->save();
+			Session::flash('successMessage', 'Comment added');
+			$post = Post::find($post_id);
+			return Redirect::back()->with('post', $post);;
+	    }
+	}
+
+	public function deleteComment($postid,$commentid)
+	{
+		$comment = Comment::find($commentid);
+		$comment->delete();
+		Session::flash('successMessage', 'Comment deleted');
+		return Redirect::back();
 	}
 
 
