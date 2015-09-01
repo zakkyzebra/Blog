@@ -36,7 +36,7 @@
                         <div class="alert alert-success">{{{Session::get('successMessage')}}} </div>
                     @endif
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    {{ $post->body }}
+                    {{ Post::renderBody($post->body) }}
                 </div>
                 @if(Auth::check() && Auth::user()->id === $post->user_id)
                     <a class="btn btn-primary" href="{{{ action('PostsController@edit', $post->id) }}}"><span class="glyphicon glyphicon-pencil"></span></a>

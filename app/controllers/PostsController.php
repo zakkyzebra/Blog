@@ -14,7 +14,8 @@ class PostsController extends \BaseController {
 	 * @return Response
 	 */
 	public function index()
-	{
+	{	
+		$postsPerPage = (Input::has('p')) ? Input::get('p') : 5;
 		if(Input::has('search')){
 			//PAGINATES QUERY
 			$query = Post::with('user');
@@ -23,7 +24,7 @@ class PostsController extends \BaseController {
 				$q->where('title', 'like', "%$search%");
 			});
 
-			$posts = $query->orderBy('created_at', 'desc')->paginate(4);
+			$posts = $query->orderBy('created_at', 'desc')->paginate($postsPerPage);
 			return View::make('posts.index')->with(['posts'=> $posts]);
 		}elseif (Input::has('user')){
 			$query = Post::with('user');
@@ -31,8 +32,8 @@ class PostsController extends \BaseController {
 				$username = Input::get('user');
 				$q->where('username', "$username");
 			});
-			
-			$posts = $query->orderBy('created_at', 'desc')->paginate(4);
+
+			$posts = $query->orderBy('created_at', 'desc')->paginate($postsPerPage);
 			return View::make('posts.index')->with(['posts'=> $posts]);
 		}elseif(Input::has('tag')){
 			$query = Post::with('tags');
@@ -40,13 +41,13 @@ class PostsController extends \BaseController {
 				$tag = Input::get('tag');
 				$q->where('name', 'like', "%$tag%");
 			});
-			
-			$posts = $query->orderBy('created_at', 'desc')->paginate(4);
+
+			$posts = $query->orderBy('created_at', 'desc')->paginate($postsPerPage);
 			return View::make('posts.index')->with(['posts'=> $posts]);
 		}else{
 			//PAGINATES ALL
 
-			$posts = Post::with('user')->orderBy('updated_at', 'desc')->paginate(4);
+			$posts = Post::with('user')->orderBy('updated_at', 'desc')->paginate($postsPerPage);
 			return View::make('posts.index')->with(['posts'=> $posts]);
 		}
 	}
@@ -194,6 +195,7 @@ class PostsController extends \BaseController {
 		Session::flash('successMessage', 'Comment deleted');
 		return Redirect::back();
 	}
+
 
 
 }

@@ -34,7 +34,7 @@
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label>Body</label>
-                            <textarea class="form-control" name="body" placeholder="Body" rows="15" value="{{{Input::old('body') }}}" id="body"></textarea>
+                            <textarea class="form-control" data-provide="markdown" name="body" placeholder="Body" rows="10" value="{{{Input::old('body') }}}" id="body"></textarea>
                         </div>
                     </div>
                     <div class="row control-group">
@@ -55,4 +55,12 @@
 		</div>
 	</div>
 
+@stop
+
+@section('script')
+    <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="/ckeditor/adapters/jquery.js"></script>
+    <script>
+        $('#body').ckeditor();
+    </script>
 @stop

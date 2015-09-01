@@ -34,6 +34,27 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="dropdown navbar-right">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Posts per page:{{Input::get('p')}}
+                        <span class="caret"></span>
+                    </button>
+                    @if(Input::has('search') || Input::has('tag') || Input::has('user'))
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="{{Post::urlBuilder()}}&p=5">5</a></li>
+                            <li><a href="{{Post::urlBuilder()}}&p=10">10</a></li>
+                            <li><a href="{{Post::urlBuilder()}}&p=15">15</a></li>
+                            <li><a href="{{Post::urlBuilder()}}&p=20">20</a></li>
+                        </ul>
+                    @else
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="?p=5">5</a></li>
+                            <li><a href="?p=10">10</a></li>
+                            <li><a href="?p=15">15</a></li>
+                            <li><a href="?p=20">20</a></li>
+                        </ul>
+                    @endif
+                </div>
                     @forelse ($posts as $post)
                         <div class="post-preview">
                             <a href="posts/{{ $post->id }}">
@@ -62,6 +83,8 @@
                         {{$posts->appends(array('user' => Input::get('user')))->links() }}
                     @elseif(Input::has('search'))
                         {{$posts->appends(array('search' => Input::get('search')))->links() }}
+                    @elseif(Input::has('p'))
+                        {{$posts->appends(array('p' => Input::get('p')))->links() }}
                     @else
                         {{ $posts->links() }}
                     @endif

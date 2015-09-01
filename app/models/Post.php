@@ -23,5 +23,26 @@
 			'body' => 'required|min:10',
 			'description' => 'required|max:128',
 		);
+		public static function renderBody($post)
+		{
+			$Parsedown = new Parsedown();
+			$dirty_html = $Parsedown->text($post);
 
+			$purifier = new HTMLPurifier();
+			$clean_html = $purifier->purify($dirty_html);
+
+			return $clean_html;
+		}
+
+		public static function urlBuilder()
+		{
+			$getRequests = Input::except('p');
+			if(isset($getRequests['user'])){
+				return "?user=" . $getRequests['user'];
+			}elseif(isset($getRequests['tag'])){
+				return "?tag=" . $getRequests['tag'];
+			}elseif(isset($getRequests['search'])){
+				return "?search=" . $getRequests['search'];
+			}
+		}
 	}
