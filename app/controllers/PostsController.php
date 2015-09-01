@@ -142,6 +142,9 @@ class PostsController extends \BaseController {
 			$post->title = Input::get('title');
 			$post->body = Input::get('body');
 			$post->description = Input::get('description');
+			$tags = $post->tags[0];
+			$tags->name = Input::get('tags');
+			$tags = $post->tags()->save($tags);
 			$post->save();
 			return Redirect::action('PostsController@show', array($id));
 		}
