@@ -39,7 +39,7 @@ class PostsController extends \BaseController {
 			$query = Post::with('tags');
 			$query->WhereHas('tags', function($q){
 				$tag = Input::get('tag');
-				$q->where('name', 'like', "%$tag%");
+				$q->where('name', '=', "$tag");
 			});
 
 			$posts = $query->orderBy('created_at', 'desc')->paginate($postsPerPage);
@@ -83,13 +83,13 @@ class PostsController extends \BaseController {
 			$post->user_id = Auth::id();
 			$post->description = Input::get('description');
 			$post->save();
-			$tags = new Tag();
-			$tags->name = Input::get('tags');
-			$tags = $post->tags()->save($tags);
+			$tags = explode(",", Input::get('tags'));
+			foreach ($tags as $tag) {
+				Post::storeTags($tag,$post);
+			}
 			return Redirect::action('PostsController@index');
 		}
 	}
-
 
 	/**
 	 * Display the specified resource.
@@ -142,10 +142,12 @@ class PostsController extends \BaseController {
 			$post->title = Input::get('title');
 			$post->body = Input::get('body');
 			$post->description = Input::get('description');
-			$tags = $post->tags[0];
-			$tags->name = Input::get('tags');
-			$tags = $post->tags()->save($tags);
 			$post->save();
+			$post->tags()->detach();
+			$tags = explode(",", Input::get('tags'));
+			foreach ($tags as $tag) {
+				Post::storeTags($tag,$post);
+			}
 			return Redirect::action('PostsController@show', array($id));
 		}
 	}

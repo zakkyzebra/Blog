@@ -45,4 +45,22 @@
 				return "?search=" . $getRequests['search'];
 			}
 		}
+
+		public static function findTag($tag)
+		{
+			$query = Tag::where('name', '=', $tag)->get();	
+			return $query;
+		}
+
+		public static function storeTags($tag,$post)
+		{
+			if(Post::findTag($tag)->first()){
+				$tags = Tag::where('name', '=' , $tag);
+				$post->tags()->attach($tags->first()->id);
+			}else{
+				$tags = new Tag();
+				$tags->name = $tag;
+				$post->tags()->save($tags);
+			}
+		}
 	}

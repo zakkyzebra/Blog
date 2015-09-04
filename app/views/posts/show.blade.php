@@ -11,11 +11,11 @@
                         <h2 class="subheading">{{ $post->description }}</h2>
                         <span class="meta">Posted on {{ $post->created_at}}</span>
                         <span class="meta">Written by <a href="/?user={{$post->user->username}}">{{ $post->user->first_name}}</a></span>
-                        <?php $arrays = explode(",", $post->tags[0]->name); ?>
+                        <?php $arrays = $post->tags; ?>
                         Tags:
                         <span class="meta">
                         @foreach ($arrays as $array)
-                            <a href="/?tag={{$array}}">{{$array}}</a>
+                            <a href="/?tag={{$array->name}}">{{$array->name}}</a>
                         @endforeach
                         </span>
                     </div>
