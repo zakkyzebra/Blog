@@ -40,7 +40,13 @@
 					<div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label>Tags</label>
-                            <input type="text" name="tags" class="form-control" placeholder="Tags" value="{{{ $post->tags[0]->name }}}" id="tags">
+                            <?php $arrays = $post->tags; ?>
+                            @foreach ($arrays as $array) 
+                                <?php $oldtags[] = $array->name;?>
+                            @endforeach
+                            <?php $oldtags = implode(',', $oldtags);?>
+
+                            <input type="text" name="tags" class="form-control" placeholder="Tags" value="{{$oldtags}}" id="tags">
                         </div>
                     </div>
                     <br>
