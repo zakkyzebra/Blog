@@ -34,6 +34,9 @@ Route::put('/editprofile', 'UsersController@editProfile');
 Route::delete('/posts/{postId}/comments/{commentId}', 'PostsController@deleteComment');
 Route::get('/posts/{postId}/comments/{commentId}', 'PostsController@show');
 
+//manage routes
+Route::get('/posts/manage', 'PostsController@getManage');
+Route::get('/posts/list', 'PostsController@getList');
 
 //posts routes
 Route::resource('/posts', 'PostsController');

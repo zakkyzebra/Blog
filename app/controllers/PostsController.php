@@ -162,7 +162,11 @@ class PostsController extends \BaseController {
 	public function destroy($id)
 	{
 		$post = Post::find($id);
-		if(Auth::check() && Auth::user()->id === $post->user_id){
+
+        if (Request::wantsJson()) {
+        	$post->delete();
+            return Response::json(array(/* ... */));
+        } elseif(Auth::check() && Auth::user()->id === $post->user_id){
 			$post->delete();
 			return Redirect::action('PostsController@index');
 		}else{
@@ -201,6 +205,16 @@ class PostsController extends \BaseController {
 		return Redirect::back();
 	}
 
+	public function getManage()
+	{
+		$allPosts = $this->getList();
+		return View::make('posts.manage')->with('allPosts', $allPosts);
+	}
 
+	protected function getList()
+	{
+		$posts = Post::with('user')->orderBy('updated_at', 'desc')->get();
+		return Response::json($posts);
+	}
 
 }

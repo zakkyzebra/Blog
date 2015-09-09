@@ -32,6 +32,14 @@ App::after(function($request, $response)
 | integrates HTTP Basic authentication for quick, simple checking.
 |
 */
+Route::filter('csrf', function()
+{
+    $token = Request::ajax() ? Request::header('X-Csrf-Token') : Input::get('_token');
+    
+    if (Session::token() !== $token) {
+        throw new Illuminate\Session\TokenMismatchException;
+    }
+});
 
 Route::filter('auth', function()
 {

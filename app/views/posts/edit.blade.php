@@ -40,6 +40,7 @@
 					<div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label>Tags</label>
+                            
                             <?php $arrays = $post->tags; ?>
                             @foreach ($arrays as $array) 
                                 <?php $oldtags[] = $array->name;?>
